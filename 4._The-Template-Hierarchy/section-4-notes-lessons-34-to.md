@@ -114,7 +114,7 @@ the tags are a limited number of tags made available by WP. Users search predefi
 
 
 
-## Setting up header.php
+## Setting up header.php - Lesson 39
 
 [Lesson 39 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407836#overview).
 
@@ -178,3 +178,59 @@ Solution:
 ```
 
 ![wp_enqueue_scripts and wp_head connection](https://i.imgur.com/3MKwsR8.png)
+
+
+
+
+Lesson 39 (5:15) - **get_header()** to call a specific splash version of our header. 
+
+passing the `splash` string as a parameter to *get_header()* function will look for **header-splash.php**
+```
+<?php get_header( 'splash' ) ?>
+
+```
+
+**if WordPress can't find header-splash.php it will default back to our original header, header.php** (5:48)
+
+
+
+
+
+## Lesson 40: Footers in WP
+
+[Lesson 40 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407838#overview).
+
+In **index.php** remove closing body and html tags and replace it with 
+
+`<?php get_footer() ?>`
+
+Then in **footer.php**, the basic requirement to load the Admin toolbar across the top of site when logged in, simply add: 
+
+`<?php wp_footer() ?>`, which appears to opperate in a similar fashion to **wp_head()** above. 
+
+Basic requirement for an **"Empty Footer"** when a client asks to _"Just remove the footer on this page"_ would be the following: 
+
+Imagine creating this custom footer for client on his calender page: 
+**<?php get_footer( 'calendar' ); ?>**
+Then loading this file as `footer-calendar.php`:
+```
+<?php wp_footer(); ?>
+    </body>
+</html>
+
+```
+(_also use conditional logic checking the page ID to load footer-calendar perhaps_)
+
+
+
+
+**Through WP function wp_footer(), WordPress loads the javascript for us to enable things like the admin bar at top**
+
+## Lesson 41: Adding Menus and body_class
+
+[Lesson 41 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407844#overview).
+
+1. register_nav_menus()
+2. wp_nav_menu()
+3. body_class()
+
