@@ -234,3 +234,113 @@ Then loading this file as `footer-calendar.php`:
 2. wp_nav_menu()
 3. body_class()
 
+
+**register_nav_menus()** 
+
+[WP Codex on register_nav_menus](https://developer.wordpress.org/reference/functions/register_nav_menus/).
+
+[WP Codex on register nav menus](https://developer.wordpress.org/reference/functions/register_nav_menus).
+
+
+After we register `register_nav_menus()` in **functions.php** we can call the menu in our template.
+
+WP Docs shows related functions. 
+In this case, the single version for just ONE menu is [register_nav_menu](https://developer.wordpress.org/reference/functions/register_nav_menu/).
+![register_nav_menu related function](https://i.imgur.com/iuKNLf2.png)
+
+
+**AFTER WE REGISTER OUR MENU(S)**
+We call our menu in our template with **wp_nav_menu**
+
+See all available array options for `wp_nav_menu`:
+https://developer.wordpress.org/reference/functions/wp_nav_menu/
+
+
+`Lesson 41 (1:45)` Zac has a jist MORE INFO on the possible parameters we can use with `wp_nav_menu` than the codex.
+https://gist.github.com/zgordon/1ce2f7fc29f45665a8ffc22d64e220b1
+
+
+`Lesson 41 (4:24)` **body_class()**
+https://developer.wordpress.org/reference/functions/body_class/
+
+We're not going pass any info to. Goes in the header and gives us a bunch of data.
+
+VERY HELPFUL (especially for css) 
+
+Place body_class() inside our body tag and it gives us informaiton like, what page we are on, what template we are using, user logged in/out.
+
+[html]
+<body <?php body_class(); ?>>
+<!--which would return something like this:  -->
+<body class="page page-id-2 page-parent page-template-default logged-in">
+[/html]
+
+[Markdown php code](https://stackoverflow.com/questions/21729960/how-do-i-use-syntax-highlighting-in-php-within-a-markdown-github-gist).
+
+
+```php
+    //Classic example from WP Codex:
+    register_nav_menus( array(
+        'pluginbuddy_mobile' => 'PluginBuddy Mobile Navigation Menu',
+        'footer_menu' => 'My Custom Footer Menu',
+    ) );
+```
+
+
+```php
+    //In functions.php after we load our CSS in wp_enqueue_scripts
+
+
+    //To register multiple menus we'd do something like this: 
+    register_nav_menus( [
+        'main-menu' => esc_html__( 'Main Menu', 'wpheirarchy'),
+        'footer-menu' => esc_html__( 'Footer Menu', 'wpheirarchy')
+        
+        ]
+    );
+```
+
+L41 (9:02) - we'll add **wp_nav_menu()** just after the body tag in our **header.php**. 
+
+Traditional way to add our menu parameters in an array parameter to `wp_nav_menu()`:
+```php
+    <nav id="site-navigation" class="main-navigation" role="navigation"> 
+        <?php 
+            wp_nav_menu([
+                'theme_location' => 'main-menu'
+            ]); 
+        ?>
+    </nav>
+```
+
+More common way is to setup the array separately and save it to variable **$args** by convention. 
+Then pass the `$args` to our WP function as the **array parameter**, in this case `wp_nav_menu`.
+```php
+    <nav id="site-navigation" class="main-navigation" role="navigation"> <!-- role is for accessability reasons (L41 9:15) -->
+        <?php 
+           // Old School: wp_nav_menu(['theme_location' => 'main-menu']);
+           // (L41 11:25) More common way to write this:           
+            $args = [
+                'theme_location' => 'main-menu'
+            ]; 
+        
+            wp_nav_menu( $args ); 
+        ?>
+    </nav>
+```
+
+L41 (11:40) - In the WP Customizer, create a `Main Menu` and add the location to our _Main Menuz_. 
+![create a main menu](https://imgur.com/xzCRuvG.png)
+
+Then ADD the following pages to our Main Menu: 
+1. Sample Page
+2. Parent Page with two Children Pages
+3. Blog Page
+
+
+
+## Lesson 42: Adding Markup To A Theme - Part 1
+
+[Lesson 42 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407846#overview).
+
+Adding Markup
