@@ -397,3 +397,84 @@ SAVE WHEN RESUME NEXT
 [Lesson 43 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407850#overview).
 
 
+`L43 (1:50)` - Article tag with dynamic id!
+
+```php
+            <article id="post-<?php the_ID(); ?>">
+                
+            </article>
+
+```
+
+
+Similar to **body_class()** there is a **post_class()** which will do the same thing has body_class();
+
+```php
+
+//Don't do this:
+<div class="<?php body_class(); ?>"> </div>
+<div class="<?php post_class(); ?>"> </div>
+
+// DO this: 
+<div <?php body_class(); ?> > </div>
+<div <?php post_class(); ?> > </div>
+
+```
+
+
+Add dynamic title `L43 (3:06)` with **the_title()** which displays the Page/Post title
+
+`<h1><?php the_title(); ?></h1>`
+
+
+
+
+### Lesson 44: Just a Quick Note; Minor Changes
+
+Closing #Content Div in the footer placed BELOW footer tag caused it to be displayed as a right hand column
+
+
+![#Content Div Below Footer Tag](https://i.imgur.com/S6IR8A5.png)
+
+Moving the #Content Div ABOVE the <footer> tag fixed the problem and moved the footer content back down where it was supposed to be: 
+
+![#Content Div Above Footer Tag](https://i.imgur.com/VsJas1H.png)
+
+
+
+
+## Lesson 45: Working With Sidebars in WordPress
+
+[Lesson 45 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407856#overview).
+
+
+`sidebar.php`
+`sidebar-custom.php`
+
+`L45 (1:45)` - Add **get_sidebar()** in **index.php** right after our `primary div`.
+
+```php
+    <?php get_sidebar(); ?>
+```
+
+Then in **sidebar.php** add an aside tag with ID secondary
+
+```php
+
+    <aside id="secondary" class="widget-area" role="complementary">
+        
+            <p>Place Widgets Here!</p>
+        
+    </aside>
+
+```
+
+This creates the standard right-side widget column: 
+![Sidebar](https://i.imgur.com/es9nY76.png)
+
+We can set up a sidebar-splash page the same way we did with header and footer: 
+`<?php get_sidebar( 'splash' ); ?>`
+
+
+
+
