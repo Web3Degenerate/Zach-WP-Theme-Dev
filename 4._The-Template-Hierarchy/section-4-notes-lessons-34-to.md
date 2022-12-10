@@ -337,10 +337,63 @@ Then ADD the following pages to our Main Menu:
 2. Parent Page with two Children Pages
 3. Blog Page
 
+Finally, make the Homepage a Static Page (Home). 
+You can do this via the `Customizer => Homepage Settings => Static Page (Home)`
 
 
-## Lesson 42: Adding Markup To A Theme - Part 1
+
+
+
+## Lesson 42: Adding Markup To A Theme - Part 1 (header.php)
 
 [Lesson 42 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407846#overview).
 
 Adding Markup
+
+
+L42 (1:35) - In **header.php** we added a _profile link_ which (controversial?) may help with meta data.
+```php
+ <link rel="profile" href="http://gmpg.org/xfn/11">  <!-- L42 (1:35) profile link can help with Meta Data -->
+```
+
+`L42 (4:45)` - use **bloginfo()** template tag to display title.
+
+`bloginfo()` allows us to grab WP data like NAME of site, DESCRIPTION etc.
+
+```php
+
+<p class='site-title'><?php bloginfo('name'); ?></p>
+
+
+```
+
+Then use **esc_url()** to protect our WP function **home_url('/')** in our href around our site's title
+
+```php
+<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></p>
+
+```
+
+SAVE WHEN RESUME NEXT
+
+```php
+
+                <header id="masthead" class="site-header" role="banner"> <!-- L42 (3:25) -->
+                
+                    <div class="site-branding">
+                        <p class="site-title">
+                            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"> <!--L42 (6:10) rel=home accessibility reasons -->
+                                <?php bloginfo( 'name' ); ?>
+                            </a>
+                        </p>
+                    </div>
+
+```
+
+
+
+## Lesson 43: Adding Markup To A Theme - Part 2 (index.php)
+
+[Lesson 43 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407850#overview).
+
+
