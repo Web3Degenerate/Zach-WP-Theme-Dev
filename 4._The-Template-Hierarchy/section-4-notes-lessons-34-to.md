@@ -476,5 +476,52 @@ We can set up a sidebar-splash page the same way we did with header and footer:
 `<?php get_sidebar( 'splash' ); ?>`
 
 
+## Lesson 46: Adding Widget Areas in WordPress
 
+[Lesson 46 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407858#overview).
+
+
+1. `register_sidebar()`
+2. `is_active_sidebar()`
+3. `dynamic_sidebar()`
+
+**register_sidebar()** is really registering a **widget area**. 
+
+[register_sidebar() WP Docs](https://developer.wordpress.org/reference/functions/register_sidebar/).
+
+[Zac's better version of register_sidebar()](https://gist.github.com/zgordon/c78b35b91b363624e08ccecf151b841b).
+
+
+```php
+
+<?php
+  register_sidebar( [
+    'name'          => esc_html__( 'Sidebar', 'themename' ),
+    'id'            => 'main-sidebar',
+    'description'   => esc_html__( 'Add widgets here.', 'themename' ),
+    'before_widget' => '<section class="widget">',
+    'class'         => 'custom-widget-area',
+    'after_widget'  => '</section>',
+    'before_title'  => '<h2 class="widget-title">',
+    'after_title'   => '</h2>',
+  ] );
+
+?>
+
+
+```
+
+`L46 (2:16)` - is_active_sidebar() - conditional tag to check if exists
+
+`dynamic_sidebar()` - ??
+
+**Set up Widget Areas in Functions.php**  at `L46 (3:52)`
+
+
+Working with `index` `functions` and `sidebar.php`
+
+
+## Lesson 47: Working With The Loop
+
+[Lesson 47 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407860#overview).
 

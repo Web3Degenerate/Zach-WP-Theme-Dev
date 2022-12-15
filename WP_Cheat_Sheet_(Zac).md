@@ -76,3 +76,40 @@ bloginfo( 'description' );
 
 `<h1><?php the_title(); ?></h1>`
 
+
+
+[Lesson 46 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407858#overview).
+
+**register_sidebar()** is really registering a **widget area**. 
+
+[register_sidebar() WP Docs](https://developer.wordpress.org/reference/functions/register_sidebar/).
+
+[Zac's better version of register_sidebar()](https://gist.github.com/zgordon/c78b35b91b363624e08ccecf151b841b).
+
+```php
+
+<?php
+  register_sidebar( [
+    'name'          => esc_html__( 'Sidebar', 'themename' ),
+    'id'            => 'main-sidebar',
+    'description'   => esc_html__( 'Add widgets here.', 'themename' ),
+    'before_widget' => '<section class="widget">',
+    'class'         => 'custom-widget-area',
+    'after_widget'  => '</section>',
+    'before_title'  => '<h2 class="widget-title">',
+    'after_title'   => '</h2>',
+  ] );
+
+?>
+
+```
+
+
+**Template Tags** in [Lsesson 46 at 5:40](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407858#overview).
+
+_Single Underscore with 'e'_
+esc_html_e() - echos it out
+
+_Double Underscore_
+esc_html__() - grabs it and saves it (when assigning it to a variable)
+
