@@ -1,5 +1,10 @@
 
 
+**Links from Zach**
+
+_WPTest.io_ https://wptest.io/
+
+
 
 
 **Best way to link to style.css** from [Z-L37 (11:34)](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407830#overview).
@@ -103,6 +108,12 @@ bloginfo( 'description' );
 ?>
 
 ```
+
+1. register_sidebar() in functions.php (_add_action( 'widgets_init', 'wphierarchy_widgets_init');_)
+2. if( ! is_active_sidebar( 'footer-sidebar') ){ return }
+3. dynamic_sidebar('_pass id here_')
+
+
 
 
 **Template Tags** in [Lsesson 46 at 5:40](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407858#overview).

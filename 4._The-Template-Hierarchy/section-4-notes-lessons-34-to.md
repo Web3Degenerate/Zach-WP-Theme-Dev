@@ -521,7 +521,117 @@ We can set up a sidebar-splash page the same way we did with header and footer:
 Working with `index` `functions` and `sidebar.php`
 
 
+### Lesson 46 Homework Brings it all together: 
+
+```php
+
+//In Functions.php:
+// Set up Widget Areas - Lesson 46: (4:01): https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407858#overview
+function wphierarchy_widgets_init(){
+    register_sidebar([
+        'name' => esc_html__( 'Main Sidebar', 'wphierarchy'),    //name and namespace for our theme in style.css cmt
+        'id' => 'main-sidebar',
+        'description' => esc_html__( 'Add widgets for main sidebar here', 'wphierarchy'),
+        'before_widget' => '<selection class="widget">',
+        'after_widget' => '</selection>',
+        'before_title' => '<h2 class="widget-title>',
+        'after_title' => '</h2>'
+    ]);
+ 
+ //The key is the id 'footer-sidebar'
+    register_sidebar([
+        'name' => esc_html__( 'Footer Sidebar', 'wphierarchy'),    //name and namespace for our theme in style.css cmt
+        'id' => 'footer-sidebar',
+        'description' => esc_html__( 'Add FOOTER widgets for FOOTY sidebar here', 'wphierarchy'),
+        'before_widget' => '<selection class="widget">',
+        'after_widget' => '</selection>',
+        'before_title' => '<h2 class="widget-title>',
+        'after_title' => '</h2>'
+    ]);    
+    
+    
+}
+
+add_action( 'widgets_init', 'wphierarchy_widgets_init');
+
+```
+
+Then create **sidebar-footer.php**
+
+Following the same tempalte, use our footer sidebar id in the **is_active_sidebar()** and **dynamic_sidebar()**
+
+```php
+    <?php
+        //From L46 9:43: https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407858#overview
+    // ERROR CHECK FOR dynamic_sidebar()
+        if( ! is_active_sidebar( 'footer-sidebar') ){  //is main-sidebar not active
+            return; //stops right here, so doesn't throw error in dynamic_sidebar
+        }      
+    ?>
+
+    <aside id="secondary" class="widget-area" role="complementary">
+        
+            //<!--<p>Place Widgets Here!</p> Lesson 46 (10:33) replace with dynamic sidebar-->
+            <?php
+                /*  With our !is_active_sidebar() check at the top of the page
+                    we can safely assume we can load our dynamic sidebar without throwing errors
+                */
+            dynamic_sidebar( 'footer-sidebar' ); ?>       
+    </aside>
+```
+
+
+
+
+FINALLY, we are ready to call in our **footer sidebar** by passing the _footer_ name to our **index.php** template:
+
+**sidebar.php** is called with __get_sidebar()__ *get_sidebar()*
+
+Any other customization (like **sidebar-footer.php**) is called with *get_sidebar(**'footer'**)*
+
+```php
+        <footer id="colophon" class="site-footer" role="contentinfo">
+            
+                <a href="<?php echo esc_url( __( 'https://wordpress.org', 'wphierarchy' ) ); ?>">
+                    <?php printf( esc_html__( 'Proudly powered by %s', 'wphierarchy'), 'WordPress' ); ?>
+                    
+                </a>
+    
+          <?php get_sidebar('footer'); ?>  
+               
+        </footer>
+```
+
+
+
+
+
+
+
 ## Lesson 47: Working With The Loop
 
 [Lesson 47 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407860#overview).
+
+
+**Add the loop to our static mark up around anything that will be repeated**
+
+On our **index.php** template, our article tag will be repeated for however many (qualifying) articles we have. 
+
+
+**Core Skeleton in Lesson 47 index.php** _See_ *index(lesson-47).php*
+```php
+ <?php if( have_posts() ) : while ( have_posts() ) : the_post();  ?>
+ // If Posts
+ // While Posts exist
+ // THE post, grabs the data for the actual post so we can use it in our display.
+
+<?php endwhile; else : ?>
+
+
+<?php endif; ?>
+
+```
+
+See [Lesson 47 index.php](#).
+
 
