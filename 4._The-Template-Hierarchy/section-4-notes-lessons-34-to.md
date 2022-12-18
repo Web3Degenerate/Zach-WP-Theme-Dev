@@ -632,6 +632,68 @@ On our **index.php** template, our article tag will be repeated for however many
 
 ```
 
-See [Lesson 47 index.php](#).
+See [Lesson 47 index.php](https://github.com/Hostnomics/Zach-WP-Theme-Dev/blob/main/4._The-Template-Hierarchy/themes/wphierarchy/index(lesson-47).php).
+
+
+
+
+
+## Lesson 48: Creating Content Includes (Modular Files)
+
+[Lesson 48 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407862#overview).
+
+
+Break out our __index.php__ logic into it's component parts with includes. 
+
+
+Pull out the WP loop code we added to index.php into a separate file, content.php using **get_template_part()**. 
+
+
+Pull the code in the article tags in **index.php** and move to **template-parts/content.php**
+
+```php
+
+    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> >
+                                
+        <header class="entry-header">
+        <!--
+        L47 (4:16) - INSSTEAD OF WRAPPING the_title() in h1's you can pass them in as parameters
+        <?php //the_title('<h1>', '</h1>'); ?>             
+        -->
+                <h1><?php the_title(); ?></h1>
+                <p>Loaded from index.php</p>
+            
+        </header>
+        
+        <div class="entry-content">
+            <!--<p>Lorem. </p>-->
+            <?php the_content(); ?>
+        </div>
+                
+    </article>
+
+```
+
+Then in **index.php** we reference the article tag in **template-parts/content.php** with: 
+
+```php
+
+<?php get_template_part( 'template-parts/content' ); ?> // L48 (1:45) 
+
+```
+For our second article tags removed to **template-parts/content-none.php**, we account for the dash in our php file like this: 
+
+```php
+                     // NOT 'template-parts/content-none' 
+<?php get_template_part( 'template-parts/content', 'none' ); ?> // L48 (3:15)
+
+```
+
+
+
+
+## Lesson 49: Working With singular.php template
+
+[Lesson 49 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407864#overview).
 
 
