@@ -697,3 +697,118 @@ For our second article tags removed to **template-parts/content-none.php**, we a
 [Lesson 49 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407864#overview).
 
 
+**TEMPLATES WHICH FALL BACK TO** **_singular.php_**:
+
+1. page.php
+2. single.php
+3. attachment.php
+
+Default to **singular.php** and then to **index.php**.
+
+Set up singular.php which was a duplicate of our index.php as of L49. This loads page.php and single.php, but not templates like **blog**, **categories** or **archives**
+
+Set up Categories and Archives in Main Sidebar: 
+- customizer -> widgets -> categories
+- customizer -> widgets -> archives
+
+
+If your singular.php template layout is the same as index.php you don't need singular.
+
+**Example**: You could use singular.php if your page.php layout is different than your acrhive page template.
+
+If your posts and pages are the same then you can use singular.php
+
+
+
+
+
+## Lesson 50: Working With single.php template
+
+[Lesson 50 in Section 4](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407866#overview).
+
+**Updates**
+- created **content-page.php** in template-parts.
+- updated **singular.php** to use _template-parts/content-page_ 
+
+- created **single.php** for single posts which will use _template-parts/content_: 
+
+```php
+        <main id="main" class="site-main" role="main">
+        
+               <?php if( have_posts() ) : while ( have_posts() ) : the_post(); ?> 
+               
+                    
+                <?php get_template_part( 'template-parts/content' ); ?> 
+          
+                <?php endwhile; else : ?>
+                
+                <?php // NOT 'content-none' get_template_part( 'template-parts/content-none' ); ?> 
+                <?php get_template_part( 'template-parts/content', 'none' ); ?> 
+                            
+                <?php endif; ?>
+                
+                <p>Template: single.php</p> <!--L49 (2:12) set up singular.php for page, single and attachment.php -->
+  
+        </main>
+```
+
+content.php => posts (single.php)
+content-page.php => pages/attachments (singular.php)
+
+
+In content.php (single.php / posts) we'll add a byline and use **esc_html_e()** so our text can be translated: 
+
+```php
+    <div class="byline">
+        <?php esc_html_e( 'Author:' );  ?>
+    </div>
+```
+
+
+### Lesson 51 mini-update on [single-post.php](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407868#overview).
+
+[Lesson 51 on single-post.php](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407868#overview).
+
+
+We'd use single-post.php to differentiate a template from a CUSTOM POST TYPE, like post-portfolio.php:
+![single-post.php vs custom post type](https://i.imgur.com/oJylqYq.png)
+
+
+
+## Lesson 52 Working With comments.php 
+
+[Lesson 52 on comments.php](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407872#overview).
+
+
+
+Recommends using an existing template for **comments.php**
+
+Pull in our comments.php template with WP template tag **comments_template()** 
+
+If the user turns off comments in **posts => discussion => Allow Comments** we can remove **the ability to add comments** (_and removes all previous comments_) by wrapping our comments_template() tag in an if statement checking if **comments_open()** evaluates to true. 
+
+
+```php
+    <?php if ( comments_open() ) : ?>  <!-- L52 (5:22)-->
+        <?php comments_template(); ?><!--Added L52 (4:05) -->
+    <?php endif; ?>
+
+```
+
+Added conditional statement in red that comments are turned off: 
+
+```php
+    <?php if ( comments_open() ) : ?>  <!-- L52 (5:22)-->
+        <?php comments_template(); ?><!--Added L52 (4:05): https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407872#overview -->
+    <?php else : ?>
+        <hr>
+        <b style="color:red;">Comments have been turned off by admin senior.</b>
+    <?php endif; ?>
+```
+
+
+
+## Lesson 53 Working With Post Formats in WordPress
+
+[Lesson 53 on Post Formats](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407874#overview).
+
