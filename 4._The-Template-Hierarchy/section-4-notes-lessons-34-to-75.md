@@ -840,3 +840,65 @@ add_action('after_setup_theme', 'wphierarchy_setupz');
 
 Then the Post format options appear on the right hand column when editing an individual post. 
 
+In **single.php** via **template-parts/content.php** we'll pull in the *get_post_format()* in the header, just before
+the_title('<h1>', '</h1>'); 
+
+```php
+
+<?php echo get_post_format(); ?>
+
+```
+
+On a post in **category** _Gallery_ we'll select 'Gallery' post type in the right hand coloumn: 
+![gallery post format selection](https://i.imgur.com/3QLXI2C.png)
+
+
+
+**Cool use of dashicons dynamically** added to **template-parts/content.php** in L53 (7th minute)
+
+```php
+                     <!--dashicons-format-video-->
+                    <span class="dashicons dashicons-format-video"></span>
+                    <?php //echo get_post_format( $post->ID ); ?>    <!--L53 (4:09): https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407874#overview -->
+                     <span class="dashicons dashicons-format-<?php echo get_post_format( $post->ID ); ?>"></span><!--L53 (6:59) Dynamically merge: https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407874#overview -->
+                    
+                        <h2>Using get_post_format( $post->ID ); Returns the word "<?php echo get_post_format( $post->ID ); ?>"
+                        <br>
+                        Therefore, class="dashicons dashicons-format-<?php echo get_post_format( $post->ID ); ?>"</h2>
+
+```
+
+
+In **single.php** we'll edit our `get_tmeplate_part('template-parts/content');`
+
+`get_tmeplate_part('template-parts/content', get_post_format() );`
+
+This will look for content-gallery, or content-video, and **if none is found, it will default back to just content.php**
+(L53 8:15)
+
+
+Around (L53 9th min) we created **content-gallery.php** and tested that a specific gallery POST is loading with our 
+_content-gallery.php_ template, such as our ![tiled post example.](https://hackinwp.com/starter-theme/2013/03/15/tiled-gallery/?preview_id=1031&preview_nonce=cd770edcb0&preview=true)
+
+
+
+
+**Lesson 53 Assgmt**: Create another template for **content-video.php** and consider different styling as used by 
+![WP Twenty Thirteen Theme.](https://wordpress.com/theme/twentythirteen)
+
+Files updated in Lesson 53: 
+1. functions(lesson-53).php
+2. content(lesson-53).php
+3. content-gallery(lesson-53).php
+4. single(lesson-53).php
+
+
+
+
+
+## Lesson 54 The home.php for the Blog Homepage (Groups of blog posts)
+
+[Lesson 54 on Blog Homepage](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407876#overview).
+
+
+
