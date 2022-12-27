@@ -812,3 +812,31 @@ Added conditional statement in red that comments are turned off:
 
 [Lesson 53 on Post Formats](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407874#overview).
 
+- We'll be using: 
+    - **get_template_part()**
+    - **get_post_format()**
+
+content-format.php
+single.php
+
+
+Reference: [Post Formats documentation](https://developer.wordpress.org/themes/functionality/post-formats/).
+
+
+Add **post-formats** support in **functions.php**: 
+
+```php
+function wphierarchy_setupz(){
+        // L37 (5:17) - Add the theme support we'll need. 
+        // Add catchall theme support for everything for now
+        //TYPO, NOT post_format it's post-formats
+        // add_theme_support( 'post_format', ['aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat'] );
+        add_theme_support( 'post-formats',  array( 'aside', 'gallery', 'link', 'quote', 'image', 'video'. 'status', 'audio', 'chat' ) );
+}
+
+add_action('after_setup_theme', 'wphierarchy_setupz'); 
+
+```
+
+Then the Post format options appear on the right hand column when editing an individual post. 
+
