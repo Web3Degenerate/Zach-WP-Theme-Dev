@@ -894,6 +894,18 @@ Files updated in Lesson 53:
 
 
 
+We call the **content type** with `get_post_format( $post->ID );`
+
+
+**Lesson 53 Homework - Create Another Content Type**
+We created a custom content type for V-I-D-E-O, by creating the `template-parts/content-video.php` template and manually changing: 
+```php
+<p><?php esc_html_e( 'Enjoy this gallery post from content-gallery.php, added theme name 2nd parameter !!', 'wphierarchy' ); ?></p><!-- L53 (9-10th) -->
+
+<p>Loaded from content-gallery.php</p>
+
+```
+But this is where you'd add your separate styling. 
 
 
 ## Lesson 54 The home.php for the Blog Homepage (Groups of blog posts)
