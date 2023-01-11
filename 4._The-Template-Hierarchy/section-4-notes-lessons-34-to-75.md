@@ -878,7 +878,7 @@ This will look for content-gallery, or content-video, and **if none is found, it
 
 
 Around (L53 9th min) we created **content-gallery.php** and tested that a specific gallery POST is loading with our 
-_content-gallery.php_ template, such as our ![tiled post example.](https://hackinwp.com/starter-theme/2013/03/15/tiled-gallery/?preview_id=1031&preview_nonce=cd770edcb0&preview=true)
+_content-gallery.php_ template, such as our !(tiled post example.)[https://hackinwp.com/starter-theme/2013/03/15/tiled-gallery/?preview_id=1031&preview_nonce=cd770edcb0&preview=true]
 
 
 
@@ -907,10 +907,26 @@ We created a custom content type for V-I-D-E-O, by creating the `template-parts/
 ```
 But this is where you'd add your separate styling. 
 
+See the [Twenty Thirteen Theme From Wordpress.com](https://wordpress.com/theme/twentythirteen).
+
 
 ## Lesson 54 The home.php for the Blog Homepage (Groups of blog posts)
 
 [Lesson 54 on Blog Homepage](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407876#overview).
 
 
+Right now we don't have `home.php` so when we set the _Front page displays_ to **static page**, it will default to **index.php**
+
+`home.php` => `index.php` 
+
+
+Use `wp_title()` to dynamically display title
+```php
+<h1><?php wp_title( '' ); //pass empty string to get rid of default arrows » Blog ?></h1>
+
+```
+WP Docs on `wp_title()`: [wp_title documentation from WordPress](https://developer.wordpress.org/reference/functions/wp_title/).
+
+
+L43 (4:43): We'll create a `content-posts.php` template to handle the way our posts are displayed on the **blog** page so we can customize the title (linking to the post), controlling layout. 
 
