@@ -910,6 +910,8 @@ But this is where you'd add your separate styling.
 See the [Twenty Thirteen Theme From Wordpress.com](https://wordpress.com/theme/twentythirteen).
 
 
+
+
 ## Lesson 54 The home.php for the Blog Homepage (Groups of blog posts)
 
 [Lesson 54 on Blog Homepage](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407876#overview).
@@ -929,4 +931,68 @@ WP Docs on `wp_title()`: [wp_title documentation from WordPress](https://develop
 
 
 L43 (4:43): We'll create a `content-posts.php` template to handle the way our posts are displayed on the **blog** page so we can customize the title (linking to the post), controlling layout. 
+
+
+**Review permalink function**
+
+`get_permalink()` allows us to pass the link into a function like `esc_url()`
+`the_permalink()` echos out the link. 
+
+At `L54 (6:30)` we passed the permalink to the post title we loop through in **content-posts.php**
+```php
+
+<?php the_title( '<h2><a href="' . esc_url( get_permalink()) . '"', '</a></h2>' ); ?>
+
+<?php
+// the_title() below is the same as the way we originally learned: 
+<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+?>
+
+//Pass Permalink L54 (6:30) https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407876#overview 
+<?php the_title( '<h2><a href="' . esc_url( get_permalink() ) . '">', '</a></h2>' ); ?>  
+
+```
+
+And previously updated **home.php** to call in **template-parts/content-posts.php**
+
+```php
+//In the has loop part of the if statement
+<?php get_template_part( 'template-parts/content-posts', get_post_format() ); ?>
+
+```
+
+
+At `L54 (10:31)` we made the following changes to **content-posts.php**: 
+```php
+<div class="entry-content">
+    <?php // the_content(); ?> //L53 (10:31) replace the_content with the excerpt()
+    <?php the_excerpt(); ?>
+</div>
+
+// removed comments: 
+    <?php if ( comments_open() ) : ?>  <!-- L52 (5:22)-->
+        <?php comments_template(); ?><!--Added L52 (4:05): https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407872#overview -->
+    <?php else : ?>
+        <hr>
+        <b style="color:red;">Comments have been turned off by admin senior.</b>
+    <?php endif; ?>
+
+```
+
+
+**Add pagination** to our **home.php** template right after the loop
+
+```php
+
+<?php echo paginate_links(); ?>
+
+```
+
+**NOTE:** we'll have to come back and fix our content-gallery.php template inside the loop. We'll fix this in the template tags lesson.
+
+
+
+## Lesson 55 The archive.php and Archives in WordPress
+
+[Lesson 55 on Archives](https://www.udemy.com/course/wordpress-theme-and-plugin-development-course/learn/lecture/7407878#overview).
 
